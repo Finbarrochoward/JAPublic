@@ -1,0 +1,30 @@
+.page {
+    display: grid;
+    grid-auto-rows: auto;
+}
+
+
+/* .nav-container {
+    grid-row: 1;
+    order:2;
+    position: fixed;
+    width: 100%;
+} */
+
+.form-box {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    padding: 2vh 5vh 5vh 5vh;
+    /* width: 100%; */
+    margin: 5vh 0 0 0;
+    overflow-x: hidden;
+}
+
+
+/* .progress-bar {
+    grid-row: 2;
+    order:2;
+    position: fixed;
+    width: 100%;
+} */

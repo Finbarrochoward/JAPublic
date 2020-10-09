@@ -1,0 +1,27 @@
+.box {
+    display: grid;
+    border-radius: 30px;
+    border-color: black;
+    border-style: solid;
+    padding: 5vh;
+    min-height: 60vh;
+    min-width: 30vw;
+    /* min-width: 300px; */
+    box-shadow: 5px 10px;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+    .box {
+        /* position: fixed; */
+        display: grid;
+        border-radius: 30px;
+        border-color: black;
+        border-style: solid;
+        padding: 5vh;
+        min-height: 100vh;
+        min-width: 70vw;
+        /* min-width: 200px; */
+        box-shadow: 5px 10px;
+        margin: 0;
+    }
+}

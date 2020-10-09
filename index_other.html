@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+  /* Structure */
+  .container {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: 25% 25% 25% 25%;
+  }
+
+  .verticalnav {
+    display: grid;
+    grid-column: 1 / 2;
+    /* grid-template-rows: 25% 25% 25% 25%; */
+  }
+
+  .navitem {
+    grid-column: 1 / 2;
+  }
+
+  .formstructure {
+    grid-column: 3 / 4;
+    grid-row: 3 / 4;
+  }
+
+
+  /* Style */
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+
+<body>
+  <ul class="verticalnav">
+    <li class="navitem"><i>Logo</i></li>
+    <li class="navitem"><a href="#">Button 1</a></li>
+    <li class="navitem"><a href="#">Button 1</a></li>
+    <li class="navitem"><a href="#">Button 1</a></li>
+  </ul>
+  <h1>Hello there</h1>
+  <form class="formStructure" action='writeToFile' , method="POST">
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="fname" value="John"><br>
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname" value="Doe"><br><br>
+    <label for="fname">Rent amount:</label><br>
+    <input type="text" id="fname" name="rentAmount" value="Rent amount"><br>
+    <label for="lname">House address:</label><br>
+    <input type="text" id="lname" name="address" value="Address"><br><br>
+    <label for="fname">Name of sublessor:</label><br>
+    <input type="text" id="fname" name="subName" value="Sublessor name"><br>
+    <input type="submit" value="Submit" class="nameSubmit">
+  </form>
+  <!-- <form class="rentForm" action="writeToFile", method="POST">
+            <label for="rentAmount">Rent Amount</label><br>
+            <input type="text" id="rentAmount" name="rentAmount" value="$200"><br>
+            <input type="submit" value="Submit" class="rentSubmit">
+          </form> -->
+
+</body>
+<script src="./index.js"></script>
+
+</html>
