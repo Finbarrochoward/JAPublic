@@ -1,30 +1,22 @@
 import React, { Component } from 'react';
 import './QuestionForm.css';
+import axios from 'axios';
+import download from 'downloadjs';
 
 export class QuestionForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: '22',
+            // busName = '',
+            // busEmail = '',
+            // busPhone = ''
         };
+        // this.form = React.createRef(null);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.generateQuestions = this.generateQuestions.bind(this);
     }
 
-    componentDidMount() {
-        // const options = {
-        //     method: 'POST',
-        //     body: JSON.stringify({cash: "poo"}),
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // };
-
-        // fetch('/test', options)
-        //     .then(res => res.json())
-        //     .then(res => alert(res));
-    }
 
     handleChange(event) {
         const name = event.target.name;
@@ -32,23 +24,23 @@ export class QuestionForm extends Component {
     }
 
     handleSubmit(event) {
-        // const nameString = this.props.questions.map((question) => this.state.[question]).join(' ');
-        // console.log(nameString)
-        // alert("A name was submitted" + nameString);
-        // console.log(this.props.questions)
         event.preventDefault();
-        console.log(event.target);
-        // const options = {
-        //     method: 'POST',
-        //     body: JSON.stringify(event),
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // };
+        const data = this.state;
+        const options = {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Accept': 'application/json'
+            }
+        };
 
-        // fetch('/test', options)
-        //     .then(res => res.json())
-        //     .then(res => alert(res));
+        axios.post('/test', {data})
+            .then(res => {
+                console.log(res)
+                download(res.data, 'PrivacyPolict-test.txt');
+                // window.location.assign(res.data);
+            })
     }
 
     generateQuestions(questionsArray) {
@@ -68,7 +60,7 @@ export class QuestionForm extends Component {
     render() {
         const qs = this.generateQuestions(this.props.questions);
         return (
-            <form onSubmit={this.handleSubmit} className="nameForm">
+            <form onSubmit={this.handleSubmit} className="nameForm" ref={this.form}>
                 {qs}
                 <button type="submit" className="next-btn"><i className="fas fa-arrow-circle-right"></i></button>
             </form>

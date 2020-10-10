@@ -22,8 +22,12 @@ app.listen(3001, function () {
 
 
 app.post('/test', (req, res) => {
-    console.log(req);
-    res.send("hrllo");
+    // const privPol = fs.readFile('/contract/BV-Privacy-Policy-Template-Update-2017.txt');
+    console.log(req.body);
+    // res.attachment(path.join(__dirname + '/contract/BV-Privacy-Policy-Template-Update-2017.txt'));
+    res.download(path.join(__dirname + '/contract/BV-Privacy-Policy-Template-Update-2017.txt'), (err) => {
+        console.log(err);
+    })
 });
 
 // app.post('/writeToFile', urlencodedParser, function (req, res) {
@@ -85,5 +89,7 @@ app.post('/test', (req, res) => {
 //     });
 // }
 
+function parseFile(filePath) {
 
+}
 
