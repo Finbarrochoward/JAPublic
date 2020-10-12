@@ -15,6 +15,7 @@
     position: fixed;
     justify-content: center;
     width: 100%;
+    z-index: 9998;
 }
 
 .navbar a {
@@ -85,6 +86,7 @@
     left: -100%;
     transition: 850ms;
     /* box-shadow: 5px 10px; */
+    z-index: 9999;
 
 }
 

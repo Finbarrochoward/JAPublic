@@ -41,3 +41,8 @@
 .fa-arrow-circle-right:hover {
     color:  #e91e63;
 }
+
+.multi-dropdown {
+    max-width: 100%;
+    z-index: 0;
+}

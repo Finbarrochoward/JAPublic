@@ -6,8 +6,10 @@
     padding: 5vh;
     min-height: 60vh;
     min-width: 30vw;
+    max-width: 60vh;
     /* min-width: 300px; */
     box-shadow: 5px 10px;
+    /* width: 70vh; */
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {

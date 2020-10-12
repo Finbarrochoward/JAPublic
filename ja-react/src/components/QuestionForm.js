@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import './QuestionForm.css';
 import axios from 'axios';
 import download from 'downloadjs';
+import {Dropdown} from 'semantic-ui-react'
 
 export class QuestionForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // busName = '',
-            // busEmail = '',
-            // busPhone = ''
         };
         // this.form = React.createRef(null);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.generateQuestions = this.generateQuestions.bind(this);
+        this.generateOptions = this.generateOptions.bind(this);
+        this.handleMultiDropdownChange = this.handleMultiDropdownChange.bind(this);
     }
 
 
@@ -23,39 +23,61 @@ export class QuestionForm extends Component {
         this.setState({ [name]: event.target.value });
     }
 
-    handleSubmit(event) {
+    handleMultiDropdownChange(key, value) {
+        console.log(key);
+        console.log(value.value)
+        this.setState({'multiValue': value.value});
+    }
+
+    async handleSubmit(event) {
         event.preventDefault();
+        console.log(this.state);
+        // const data = new FormData(this.state);
         const data = this.state;
         const options = {
             method: 'POST',
             body: data,
             headers: {
-                'Content-Type': 'multipart/form-data',
-                'Accept': 'application/json'
+                // 'Content-Type': 'multipart/form-data',
+                'Content-Type': 'application/json'
             }
         };
 
-        axios.post('/test', {data})
+        await axios.post('/test', data)
             .then(res => {
                 console.log(res)
-                download(res.data, 'PrivacyPolict-test.txt');
+                download(new Blob([res.data]), 'PrivPolTest.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+                // download('/test/PrivPolTest.docx');
                 // window.location.assign(res.data);
             })
     }
 
     generateQuestions(questionsArray) {
         // Generates the questions specified in the FormCard, in the form of inputs and labels
+        // const options = [
+        //     {key: '1',  value: 'interviews', text: 'Interviews'},
+        //     {key: '2', value: 'correspondance', text: 'Correspondance'},
+        //     {key: '3', value: 'phone', text: 'Telephone'},
+        // ] 
         return questionsArray.map((question, index) => (
             <div key={index} className="question-div">
                 <label className="label">{question.question}</label>
-                {question.type === "select" ? <select multiple>
-                    {question.values.map(
-                        (val, index) => (<option key={index} value={index}>{val}</option>)
-                    )}</select>
-                    : <input type={question.type} onChange={this.handleChange} className="input-style" name={question.question}></input>}
+                {question.type === "select" ? <Dropdown onChange={this.handleMultiDropdownChange} className="multi-dropdown" placeholder="Enter" fluid multiple selection options={this.generateOptions(question.values)}/>
+                    : <input type={question.type} onChange={this.handleChange} className="input-style" name={question.questionSignature}></input>}
             </div>
         ));
     }
+
+    generateOptions(optionsList) {
+        return optionsList.map((option, index) => 
+            ({
+                key: index,
+                value: option.toLowerCase(),
+                text: option
+            })
+        )
+    }
+
 
     render() {
         const qs = this.generateQuestions(this.props.questions);

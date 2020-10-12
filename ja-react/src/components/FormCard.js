@@ -9,21 +9,25 @@ export class FormCard extends Component {
             name: '',
             questions: [{
                 question: "Business Name",
+                questionSignature: "busName",
                 type: "text",
                 values: []
             },
             {
                 question: "Business Email Address",
+                questionSignature: "busEmail",
                 type: "text",
                 values: []
             },
             {
                 question: "Business Phone Number",
+                questionSignature: "busPhone",
                 type: "text",
                 values: []
             },
             {
                 question: "How is information obtained?",
+                questionSignature: "infoObtained",
                 type: "select",
                 values: ["Interviews", "Correspondence", "Telephone", "Fascimile", "Email", "Website", "Media and publications", "Cookies", "Other publicly available sources"]
             }
