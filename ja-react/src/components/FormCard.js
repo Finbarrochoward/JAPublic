@@ -7,38 +7,12 @@ export class FormCard extends Component {
         super(props);
         this.state = {
             name: '',
-            questions: [{
-                question: "Business Name",
-                questionSignature: "busName",
-                type: "text",
-                values: []
-            },
-            {
-                question: "Business Email Address",
-                questionSignature: "busEmail",
-                type: "text",
-                values: []
-            },
-            {
-                question: "Business Phone Number",
-                questionSignature: "busPhone",
-                type: "text",
-                values: []
-            },
-            {
-                question: "How is information obtained?",
-                questionSignature: "infoObtained",
-                type: "select",
-                values: ["Interviews", "Correspondence", "Telephone", "Fascimile", "Email", "Website", "Media and publications", "Cookies", "Other publicly available sources"]
-            }
-        ]
         };
     }
 
     render() {
-        console.log(this.state.questions)
         return (<div className="box">
-            <QuestionForm questions={this.state.questions} />
+            <QuestionForm questions={this.props.formCardQuestions} onChange={this.props.onChange} onMultiChange={this.props.onMultiChange}/>
         </div>
         );
     }

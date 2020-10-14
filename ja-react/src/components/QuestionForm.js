@@ -10,24 +10,24 @@ export class QuestionForm extends Component {
         this.state = {
         };
         // this.form = React.createRef(null);
-        this.handleChange = this.handleChange.bind(this);
+        // this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.generateQuestions = this.generateQuestions.bind(this);
         this.generateOptions = this.generateOptions.bind(this);
-        this.handleMultiDropdownChange = this.handleMultiDropdownChange.bind(this);
+        // this.handleMultiDropdownChange = this.handleMultiDropdownChange.bind(this);
     }
 
 
-    handleChange(event) {
-        const name = event.target.name;
-        this.setState({ [name]: event.target.value });
-    }
+    // handleChange(event) {
+    //     const name = event.target.name;
+    //     this.setState({ [name]: event.target.value });
+    // }
 
-    handleMultiDropdownChange(key, value) {
-        console.log(key);
-        console.log(value.value)
-        this.setState({'multiValue': value.value});
-    }
+    // handleMultiDropdownChange(key, value) {
+    //     console.log(key);
+    //     console.log(value.value)
+    //     this.setState({'multiValue': value.value});
+    // }
 
     async handleSubmit(event) {
         event.preventDefault();
@@ -43,7 +43,7 @@ export class QuestionForm extends Component {
             }
         };
 
-        await axios.post('/test', data)
+        await axios.post('/postPrivPol', data)
             .then(res => {
                 console.log(res)
                 download(new Blob([res.data]), 'PrivPolTest.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
@@ -53,17 +53,11 @@ export class QuestionForm extends Component {
     }
 
     generateQuestions(questionsArray) {
-        // Generates the questions specified in the FormCard, in the form of inputs and labels
-        // const options = [
-        //     {key: '1',  value: 'interviews', text: 'Interviews'},
-        //     {key: '2', value: 'correspondance', text: 'Correspondance'},
-        //     {key: '3', value: 'phone', text: 'Telephone'},
-        // ] 
         return questionsArray.map((question, index) => (
             <div key={index} className="question-div">
                 <label className="label">{question.question}</label>
-                {question.type === "select" ? <Dropdown onChange={this.handleMultiDropdownChange} className="multi-dropdown" placeholder="Enter" fluid multiple selection options={this.generateOptions(question.values)}/>
-                    : <input type={question.type} onChange={this.handleChange} className="input-style" name={question.questionSignature}></input>}
+                {question.type === "select" ? <Dropdown onChange={this.props.onMultiChange} className="multi-dropdown" placeholder="Enter" fluid multiple selection options={this.generateOptions(question.values)}/>
+                    : <input type={question.type} onChange={this.props.onChange} className="input-style" name={question.questionSignature}></input>}
             </div>
         ));
     }

@@ -46,7 +46,7 @@ function errorHandler(error) {
     throw error;
 }
 
-app.post('/test', async (req, res) => {
+app.post('/postPrivPol', async (req, res) => {
     var content = fs.readFileSync(path.join(__dirname + '/contract/test-doc.docx'), 'binary');
     var zip = new PizZip(content);
     var doc;
@@ -73,14 +73,20 @@ app.post('/test', async (req, res) => {
 
 
     // buf is a nodejs buffer, you can either write it to a file or do anything else with it.
-    fs.writeFileSync(path.join(__dirname, '/contract/test-output.docx'), buf);
+    // fs.writeFileSync(path.join(__dirname, '/contract/test-output.docx'), buf);
 
-    res.download(path.join(__dirname + '/contract/test-output.docx'), (err) => {
-        console.log(err);
-    })
+    // res.download(path.join(__dirname + '/contract/test-output.docx'), (err) => {
+    //     console.log(err);
+    res.end(buf);
+})
+
+
+app.get('/getPrivPol', (req, res) => {
+
+});
 
     // var filename = "PrivPolTest.docx"
-    
+
     // await res.writeHead(200, {
     //     'Content-Type': "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     //     'Content-disposition': 'attachment;filename=' + filename,
@@ -89,8 +95,6 @@ app.post('/test', async (req, res) => {
     // .then(res.end(buf));
 
     // res.end(buf);
-});
-
 
 
 // app.post('/writeToFile', urlencodedParser, function (req, res) {
